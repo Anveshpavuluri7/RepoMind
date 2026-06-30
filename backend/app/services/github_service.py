@@ -48,10 +48,13 @@ async def exchange_code_for_token(code: str) -> str:
                 "code": code,
             },
         )
+    logger.info("GitHub token exchange status: %s", resp.status_code)
+    logger.info("GitHub token exchange response: %s", resp.text)
     if resp.status_code != 200:
         raise GitHubAPIError("Failed to exchange OAuth code for token")
     data = resp.json()
     if "error" in data:
+        logger.error("GitHub OAuth error: %s — %s", data.get("error"), data.get("error_description"))
         raise GitHubAPIError(data.get("error_description", data["error"]))
     return data["access_token"]
 
