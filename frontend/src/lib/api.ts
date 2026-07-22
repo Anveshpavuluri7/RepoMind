@@ -9,7 +9,7 @@ import type {
   ChatHistoryResponse,
 } from "@/types";
 
-const API_BASE = "/api";
+const API_BASE = `${process.env.NEXT_PUBLIC_API_URL}/api`;
 
 async function apiFetch<T>(path: string, options?: RequestInit): Promise<T> {
   const res = await fetch(`${API_BASE}${path}`, {
