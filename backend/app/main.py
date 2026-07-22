@@ -19,9 +19,12 @@ logger = logging.getLogger(__name__)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # On startup: create all tables (use Alembic migrations in production)
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
+    try:
+        async with engine.begin() as conn:
+            await conn.run_sync(Base.metadata.create_all)
+        logger.info("Database tables ready")
+    except Exception as e:
+        logger.warning("Could not run create_all at startup (tables may already exist): %s", e)
     logger.info("RepoMind backend started — env: %s", settings.app_env)
     yield
     await engine.dispose()
