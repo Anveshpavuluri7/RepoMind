@@ -56,8 +56,8 @@ async def github_callback(
         key="access_token",
         value=jwt_token,
         httponly=True,
-        secure=settings.is_production,
-        samesite="lax",
+        secure=True,
+        samesite="none",
         max_age=settings.jwt_expire_minutes * 60,
     )
     return response
