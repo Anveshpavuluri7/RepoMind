@@ -22,7 +22,6 @@ async def github_login():
 @router.get("/callback")
 async def github_callback(
     code: str,
-    response: Response,
     db: AsyncSession = Depends(get_db),
 ):
     access_token = await github_service.exchange_code_for_token(code)
