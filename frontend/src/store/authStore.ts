@@ -29,7 +29,7 @@ export const useAuthStore = create<AuthState>((set) => ({
   },
 
   logout: async () => {
-    await authApi.logout();
+    localStorage.removeItem("access_token");
     set({ user: null });
     window.location.href = "/";
   },

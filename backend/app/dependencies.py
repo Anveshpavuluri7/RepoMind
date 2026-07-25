@@ -1,7 +1,7 @@
 from typing import Annotated
 from uuid import UUID
 
-from fastapi import Depends, Cookie, HTTPException, status
+from fastapi import Depends, HTTPException, Request, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
@@ -12,12 +12,14 @@ from app.models.repository import Repository
 
 
 async def get_current_user(
-    access_token: str | None = Cookie(default=None),
+    request: Request,
     db: AsyncSession = Depends(get_db),
 ) -> User:
-    if not access_token:
+    auth_header = request.headers.get("Authorization", "")
+    if not auth_header.startswith("Bearer "):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Not authenticated")
 
+    access_token = auth_header[len("Bearer "):]
     user_id = decode_access_token(access_token)
     if not user_id:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid token")

@@ -11,10 +11,14 @@ import type {
 
 const API_BASE = `${process.env.NEXT_PUBLIC_API_URL}/api`;
 
+function getAuthHeaders(): Record<string, string> {
+  const token = typeof window !== "undefined" ? localStorage.getItem("access_token") : null;
+  return token ? { Authorization: `Bearer ${token}` } : {};
+}
+
 async function apiFetch<T>(path: string, options?: RequestInit): Promise<T> {
   const res = await fetch(`${API_BASE}${path}`, {
-    credentials: "include",
-    headers: { "Content-Type": "application/json", ...options?.headers },
+    headers: { "Content-Type": "application/json", ...getAuthHeaders(), ...options?.headers },
     ...options,
   });
 

@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, Response
+from fastapi import APIRouter, Depends, HTTPException
 from fastapi.responses import RedirectResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
@@ -51,21 +51,11 @@ async def github_callback(
     await db.flush()
 
     jwt_token = create_access_token(str(user.id))
-    response = RedirectResponse(url=f"{settings.frontend_url}/dashboard")
-    response.set_cookie(
-        key="access_token",
-        value=jwt_token,
-        httponly=True,
-        secure=True,
-        samesite="none",
-        max_age=settings.jwt_expire_minutes * 60,
-    )
-    return response
+    return RedirectResponse(url=f"{settings.frontend_url}/auth/callback?token={jwt_token}")
 
 
 @router.post("/logout")
-async def logout(response: Response):
-    response.delete_cookie("access_token")
+async def logout():
     return {"message": "Logged out"}
 
 
