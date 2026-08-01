@@ -1,6 +1,22 @@
-# RepoMind
+<div align="center">
 
-**AI-powered Git repository intelligence platform.** RepoMind connects to your GitHub repositories and uses Claude AI to analyze every commit — explaining what changed, why it changed, the impact, and the risk level. Ask questions about your codebase history in plain English and get precise, cited answers.
+# 🧠 RepoMind
+
+**AI-powered Git repository intelligence platform.**  
+RepoMind connects to your GitHub repositories and uses Claude AI to analyze every commit —  
+explaining what changed, why it changed, the impact, and the risk level.  
+Ask questions about your codebase history in plain English and get precise, cited answers.
+
+![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-009688?style=flat-square&logo=fastapi&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=flat-square&logo=python&logoColor=white)
+![Claude AI](https://img.shields.io/badge/Claude_AI-Opus_4.8-CC785C?style=flat-square)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?style=flat-square&logo=postgresql&logoColor=white)
+
+[![Live Demo](https://img.shields.io/badge/🌐%20LIVE%20DEMO-000000?style=for-the-badge)](https://repo-mind-psi.vercel.app/)
+[![Visit Application](https://img.shields.io/badge/VISIT%20APPLICATION-6366f1?style=for-the-badge&logoColor=white)](https://repo-mind-psi.vercel.app/)
+
+</div>
 
 ---
 
