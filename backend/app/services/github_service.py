@@ -112,7 +112,7 @@ async def fetch_commit_detail(
     full_name: str,
     sha: str,
 ) -> GitHubCommitDetail:
-    async with httpx.AsyncClient() as client:
+    async with httpx.AsyncClient(timeout=60.0) as client:
         headers = {
             "Authorization": f"token {access_token}",
             "Accept": "application/vnd.github.v3.diff",

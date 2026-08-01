@@ -71,5 +71,9 @@ async def upsert_pr_embedding(repo_id: str, pr_id: str, document: str, metadata:
 
 
 async def similarity_search(repo_id: str, query: str, k: int = 8) -> list[Document]:
-    store = await get_vector_store(repo_id)
-    return store.similarity_search_with_score(query, k=k)
+    try:
+        store = await get_vector_store(repo_id)
+        return store.similarity_search_with_score(query, k=k)
+    except Exception as e:
+        logger.warning("ChromaDB similarity_search unavailable: %s — returning empty results", e)
+        return []
